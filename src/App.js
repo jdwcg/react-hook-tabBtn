@@ -8,6 +8,7 @@ const Header = props => {
     }}>{props.title}</a></div>
   )
 }
+
 const Nav = props => {
   return (
     <div onClick={e=>{
