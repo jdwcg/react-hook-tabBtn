@@ -1,0 +1,28 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.contain {
+  position: relative;
+  border: 1px solid tan;
+}
+
+.highL {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 38px;
+  height: 24px;
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+  background: tan;
+}
+
+button {
+  background: transparent;
+  border: none;
+  text-align: center;
+}
+/*# sourceMappingURL=App.css.map */

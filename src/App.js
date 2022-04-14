@@ -1,55 +1,62 @@
-import React, { useState } from "react";
-
-const Header = props => {
-  return (
-    <div><a href='/' onClick={ e=> {
-      e.preventDefault();
-      props.onChangeFoo();
-    }}>{props.title}</a></div>
-  )
+import React, { useState, useRef} from "react";
+import'./App.css';
+const TabA = props => {
+   return(
+      <button onClick={()=>{
+         props.onChangeFoo()
+      }}> { props.title } </button>
+   )
 }
-
-const Nav = props => {
-  return (
-    <div onClick={e=>{
-      e.preventDefault();
-      props.onChangeFoo();
-    }}>{props.lis}</div>
-  )
-}
-const ContA = props => {
-  return (
-    <div>Header is ....</div>
-  )
-}
-const ContB = props => {
-  return (
-    <div>About us ....</div>
-  )
-}
+const TabB = props => {return(<button onClick={()=>{props.onChangeFoo()}}> { props.title } </button>)}
 
 const App = () => {
-  const navLis = <a href='/'>About</a>
 
-  const [foo, fooset] = useState("tabA");
+   const [foo, setFoo] = useState("aaa");
+   let content = null;
+   if(foo === "aaa") {
+      content = <div>aaaaaaaaaaaaaaa</div>
+   } else if(foo === "bbb") {
+      content = <div>bbbbbbbbbbb</div>
+   }
 
+   let highL = useRef();
+   
+   function sliding () {
+      let newWidth = highL.current;
+      let newWidthSliding = newWidth.offsetWidth;
+      console.log(newWidthSliding)
+      let slidingElem = highL.current;
+      console.log(slidingElem)
+      slidingElem.style.left = newWidthSliding + 'px';
+   }
+   function sliding1 () {
+      let newWidth = highL.current;
+      let newWidthSliding = newWidth.offsetWidth;
+      console.log(newWidthSliding)
+      let slidingElem = highL.current;
+      console.log(slidingElem)
+      slidingElem.style.left = 0 + 'px';
+   }
 
-    let content = null;
-    if (foo === "tabA") {
-      content = <ContA />;
-    } else if (foo === "tabB") {
-      content = <ContB />;
-    }
-  return (
-    <div>
-      <Header title='Header' onChangeFoo={()=> {
-        fooset("tabA");
-      }}/>
-      <Nav lis={navLis} onChangeFoo={()=>{
-        fooset("tabB");
-      }} />
-      {content}
-  </div>
-  )
+   return (
+      <div className="contain">
+         <div>
+            <TabA title='aaa' onChangeFoo = { () => {
+               setFoo("aaa");
+               sliding1();
+            } } />
+            
+            <TabB title='bbb' onChangeFoo = { () => {
+               setFoo("bbb"); 
+               sliding(); 
+               } } />
+         </div>
+
+         <span className='highL' ref={highL}></span>
+
+         {content}
+      </div>
+   )
 }
+
 export default App;
