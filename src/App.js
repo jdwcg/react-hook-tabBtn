@@ -1,62 +1,47 @@
-import React, { useState, useRef} from "react";
-import'./App.css';
-const TabA = props => {
-   return(
-      <button onClick={()=>{
-         props.onChangeFoo()
-      }}> { props.title } </button>
-   )
-}
-const TabB = props => {return(<button onClick={()=>{props.onChangeFoo()}}> { props.title } </button>)}
-
+import React, { useState, useRef, useEffect } from "react";
+import './App.css';
 const App = () => {
+   const [cont, setCont] = useState('welcome');
 
-   const [foo, setFoo] = useState("aaa");
    let content = null;
-   if(foo === "aaa") {
-      content = <div>aaaaaaaaaaaaaaa</div>
-   } else if(foo === "bbb") {
-      content = <div>bbbbbbbbbbb</div>
+   if(cont==='welcome') {
+      content = <div>welcome....is.....</div>
+   } else if (cont === 'read') {
+      content = <div>item....is.....</div>
    }
 
-   let highL = useRef();
-   
+   const heighL = useRef();
+   const btnWidth = useRef();
+   useEffect(()=> {
+      heighL.current.style.width = btnWidth.current.offsetWidth + 'px';
+      heighL.current.style.height = btnWidth.current.offsetHeight + 'px';
+   })
+
    function sliding () {
-      let newWidth = highL.current;
-      let newWidthSliding = newWidth.offsetWidth;
-      console.log(newWidthSliding)
-      let slidingElem = highL.current;
-      console.log(slidingElem)
-      slidingElem.style.left = newWidthSliding + 'px';
+      heighL.current.style.left = btnWidth.current.offsetWidth + 'px';
    }
-   function sliding1 () {
-      let newWidth = highL.current;
-      let newWidthSliding = newWidth.offsetWidth;
-      console.log(newWidthSliding)
-      let slidingElem = highL.current;
-      console.log(slidingElem)
-      slidingElem.style.left = 0 + 'px';
+   function sliding2 () {
+      heighL.current.style.left = 0 + 'px';
    }
 
-   return (
-      <div className="contain">
+   return(
+      <div>
          <div>
-            <TabA title='aaa' onChangeFoo = { () => {
-               setFoo("aaa");
-               sliding1();
-            } } />
-            
-            <TabB title='bbb' onChangeFoo = { () => {
-               setFoo("bbb"); 
-               sliding(); 
-               } } />
+            <div>
+            <button ref={btnWidth} onClick={()=> {
+               setCont('welcome')
+               sliding2()
+               
+            }}>click</button>
+            <button  ref={btnWidth} onClick={()=> {
+               setCont('read')
+               sliding()
+            }}>click</button>
+            </div>
+            <span ref={heighL} className="hL"></span>
          </div>
-
-         <span className='highL' ref={highL}></span>
-
-         {content}
+         <div> {content} </div>
       </div>
    )
 }
-
 export default App;

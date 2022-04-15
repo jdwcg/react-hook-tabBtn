@@ -1,19 +1,11 @@
-* {box-sizing: border-box;}
-.contain {
-   position: relative;
+body {margin:0}
+button {
+   background: transparent;
+   padding: 10px 1rem;
    border: 1px solid tan;
 }
-.highL {
+.hL {
    position: absolute;
-   top: 0;
-   left: 0; z-index: -1;
-   width: 38px;
-   height: 24px; 
+   background: tan; top: 0; left: 0; z-index: -1;
    transition: all .3s ease;
-   background: tan;
-}
-button {
-   background: transparent; 
-   border:none;
-   text-align: center;
 }
